@@ -2,6 +2,7 @@ package com.filewriter;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -32,5 +33,14 @@ public class Writer {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static void appendContent(File file, String content) throws IOException {
+        FileWriter fw = new FileWriter(file, true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.newLine();
+        bw.write(content);
+        bw.newLine();
+        bw.close();
     }
 }
