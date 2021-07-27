@@ -4,6 +4,7 @@ import com.filemanager.CommandRunner;
 import com.filewriter.Writer;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -36,7 +37,11 @@ public class Main {
          */
         //CommandRunner c = new CommandRunner();
         System.out.println(Writer.exists("src/com/filewriter/Writer.java"));
-        Writer.writeContent("Files in Java might be tricky, but it is fun enough!", Writer.createFile("src/com/filewriter", "test", "txt"));
+        File file = Writer.createFile("src/com/filewriter", "test", "txt");
+        Writer.writeContent("Files in Java might be tricky, but it is fun enough!", file);
+        for(int i = 0; i < 10; i++){
+            Writer.appendContent(file, ""+i);
+        }
     }
 
 }
