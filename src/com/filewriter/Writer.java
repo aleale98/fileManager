@@ -2,10 +2,7 @@ package com.filewriter;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class Writer {
 
@@ -21,18 +18,11 @@ public class Writer {
         return f;
     }
 
-    public static boolean writeContent(String content, File file){
-        try {
+    public static void writeContent(String content, File file) throws IOException {
             FileWriter myWriter = new FileWriter(file);
-            myWriter.write(content);
-            myWriter.close();
-            System.out.println("Successfully wrote to the file.");
-            return true;
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-            return false;
-        }
+            BufferedWriter bufferedWriter = new BufferedWriter(myWriter);
+            bufferedWriter.write(content);
+            bufferedWriter.close();
     }
 
     public static void appendContent(File file, String content) throws IOException {
@@ -42,5 +32,11 @@ public class Writer {
         bw.write(content);
         bw.newLine();
         bw.close();
+    }
+
+    public static void resetFile(File file) throws IOException {
+        PrintWriter writer = new PrintWriter(file);
+        writer.print("");
+        writer.close();
     }
 }
